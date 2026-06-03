@@ -1,0 +1,174 @@
+/* --- TUS VARIABLES Y ESTILOS BASE (Mantenidos) --- */
+:root {
+    --dark-blue: #0f172a;
+    --accent-blue: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.3);
+    --text-gray: #64748b;
+    --white: #ffffff;
+    --bg-light: #f8fafc;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-blue);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Evita scrolls raros en animaciones */
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* --- HEADER DINÁMICO (Mantenido) --- */
+header {
+    background: var(--dark-blue);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background 0.4s, padding 0.4s;
+}
+
+header.header-active {
+    padding: 10px 0;
+    background: rgba(15, 23, 42, 0.98);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+nav { display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { height: 50px; width: auto; }
+nav ul { display: flex; list-style: none; }
+nav ul li a { color: var(--white); text-decoration: none; margin-left: 25px; transition: 0.3s; font-weight: 300;}
+nav ul li a:hover { color: var(--accent-blue); }
+
+/* --- HERO SECTION --- */
+.hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: var(--white);
+    padding: 100px 0;
+}
+
+.hero-content { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.hero-text h1 { font-size: 3rem; margin-bottom: 15px; line-height: 1.2; }
+.subtitle { font-size: 1.4rem; color: var(--accent-blue); margin-bottom: 20px; font-weight: 600; }
+
+.profile-pic {
+    width: 300px; height: 300px; border-radius: 50%;
+    border: 5px solid var(--accent-blue);
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* --- NUEVA ANIMACIÓN AVANZADA DEL BOTÓN --- */
+.btn {
+    display: inline-block; 
+    background: var(--accent-blue);
+    color: var(--dark-blue); 
+    padding: 12px 30px;
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 600;
+    margin-top: 25px; 
+    position: relative;
+    overflow: hidden; /* Necesario para el efecto brillo */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+/* Efecto Brillo (Flash) al pasar el mouse */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: -50%; font-weight: 600;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: rotate(30deg);
+    transition: none;
+}
+
+.btn:hover::after {
+    left: 120%;
+    transition: left 0.7s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--accent-blue);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+/* Clase para el pulso sutil (activada por JS) */
+.btn-pulse {
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+/* --- SECCIONES Y TARJETAS DINÁMICAS --- */
+.section-title { text-align: center; margin: 60px 0 40px; font-size: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
+
+/* Estilo Base de la Tarjeta */
+.card {
+    background: var(--white); 
+    padding: 40px; 
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Estado inicial para la animación de revelado */
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    backface-visibility: hidden; /* Mejora rendimiento */
+}
+
+/* Clase que JS aplica para revelar */
+.card.reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.icon { font-size: 3rem; margin-bottom: 20px; display: block;}
+
+/* --- FOOTER (Mantenido) --- */
+footer { background: var(--dark-blue); color: var(--white); padding: 60px 0 30px; text-align: center; }
+.contact-links { display: flex; flex-direction: column; gap: 15px; margin: 30px 0; }
+.contact-item { color: var(--accent-blue); text-decoration: none; font-size: 1.1rem;}
+
+/* --- CLASES DE UTILIDAD PARA ANIMACIÓN DE ENTRADA --- */
+.hidden-down {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.show-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .hero-content { flex-direction: column-reverse; text-align: center; }
+    .hero-text h1 { font-size: 2.2rem; }
+    .profile-pic { width: 220px; height: 220px; }
+}
